@@ -421,6 +421,13 @@ const entries = [
 		github: "jutsK"
 	},
 	{
+		title: "Blur background loading",
+		filename: "blur-loading-page.html",
+		description: "A smooth Css transition to slowly load the contents of the web page",
+		author: "Nirban Chakraborty",
+		github: "nirban256"
+	},
+	{
 		title: "Task List App",
 		filename: "taskListApp.html",
 		description: "A task list application with local storage and filter tasks functionality",
@@ -489,5 +496,19 @@ const entries = [
 		description: "A random colour generator which shows you different colours after every click",
 		author: "Rajiv Sahal",
 		github: "Ryukemeister"
+	},
+	{
+		title: "Tips-Calculator",
+		filename: "Tips-Calculator.html",
+		description: "A simple Tips-calculator",
+		author: "Amaan Haider",
+		github: "AmaanHaider"
+	},
+	{
+		title: "Movie List",
+		filename: "movie-list.html",
+		description: "Ratings for movies i've seen.",
+		author: "Christopher Powroznik (Metroxe)",
+		github: "Metroxe"
 	}
 ];
