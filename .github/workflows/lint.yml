@@ -12,6 +12,6 @@ jobs:
     - name: Install HTMLHint and ESLint
       run: npm install -g htmlhint eslint
     - name: Lint HTML files
-      run: htmlhint --file "*.html" .
+      run: htmlhint --pattern "*.html" .
     - name: Lint JavaScript files
       run: eslint --ext .js .
