@@ -12,4 +12,4 @@ jobs:
     - name: Install HTMLHint and ESLint
       run: npm install -g htmlhint eslint
     - name: Lint JavaScript files
-      run: eslint --ext .js .
+      run: npm init @eslint/config && eslint --ext .js .
