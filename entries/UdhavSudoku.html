@@ -78,8 +78,8 @@
     </h1>
     <h3 id="outputshow"></h3>
     <h2>
-      Please do not enter Wrong values.<br>Enter Values ranging from 1-9 in the boxes given below. Enter 0 for values
-      you don't know.
+      Please do not enter Wrong values.<br />Enter Values ranging from 1-9 in
+      the boxes given below. Enter 0 for values you don't know.
     </h2>
     <div class="table">
       <div class="group31">
@@ -673,9 +673,9 @@
     </div>
   </body>
   <script>
-    document.getElementById('username').innerText="";
-    let username=prompt("Enter your Name :");
-    document.getElementById('username').innerText=username;
+    document.getElementById("username").innerText = "";
+    let username = prompt("Enter your Name :");
+    document.getElementById("username").innerText = username;
     let board = new Array(9);
     for (let i = 0; i < 9; i++) {
       board[i] = new Array(9);
@@ -685,11 +685,10 @@
         for (let j = 0; j < 9; j++) {
           let objid = i * 9 + j + 1;
           objid = "at" + objid;
-          let objval=document.getElementById(objid).value;
-          if(objval!="")
-          board[i][j] = objval;
-          else{
-            board[i][j]=0;
+          let objval = document.getElementById(objid).value;
+          if (objval != "") board[i][j] = objval;
+          else {
+            board[i][j] = 0;
           }
         }
       }
@@ -704,14 +703,14 @@
         }
       });
       newprom
-      .then(() => {
-        console.log("Solved in newprom");
-        afterSolve();
-        linePrinter(true);
-      })
-      .catch(() => {
-        console.log("Error in newprom solve");
-        linePrinter(false);
+        .then(() => {
+          console.log("Solved in newprom");
+          afterSolve();
+          linePrinter(true);
+        })
+        .catch(() => {
+          console.log("Error in newprom solve");
+          linePrinter(false);
         });
     }
 
@@ -731,13 +730,12 @@
         for (let j = 0; j < 9; j++) {
           if (board[i][j] == 0) {
             for (let val = 1; val <= 9; val++) {
-              if(checker(i,j,val)){
-                board[i][j]=val;
-                let nextsol=solveNow();
-                if(!nextsol){
-                  board[i][j]=0;
-                }
-                else{
+              if (checker(i, j, val)) {
+                board[i][j] = val;
+                let nextsol = solveNow();
+                if (!nextsol) {
+                  board[i][j] = 0;
+                } else {
                   return true;
                 }
               }
@@ -756,7 +754,11 @@
         if (board[i][col] == val) {
           return false;
         }
-        if (board[3 * Math.floor(row / 3) + Math.floor(i / 3)][3 * Math.floor(col / 3) + (i % 3)] == val) {
+        if (
+          board[3 * Math.floor(row / 3) + Math.floor(i / 3)][
+            3 * Math.floor(col / 3) + (i % 3)
+          ] == val
+        ) {
           return false;
         }
       }

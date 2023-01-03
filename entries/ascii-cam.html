@@ -112,37 +112,39 @@ A S C I I C A M
     <canvas id="canvas" width="640" height="480"></canvas>
     <script type="application/javascript">
       (() => {
-        'use strict';
+        "use strict";
 
         let interval;
         let r_layer, g_layer, b_layer;
-        const palette = [' ', '.', '-', ':', '+', '*', '=', '%', '@', '#'];
-        const vanity = 'B Y  I V E S E E N T H E D A R K';
+        const palette = [" ", ".", "-", ":", "+", "*", "=", "%", "@", "#"];
+        const vanity = "B Y  I V E S E E N T H E D A R K";
 
         /**
          * @param {*} stream
          */
-        const handle_video = stream => {
-          const canvas = document.getElementById('canvas');
-          const ctx = canvas.getContext('2d');
+        const handle_video = (stream) => {
+          const canvas = document.getElementById("canvas");
+          const ctx = canvas.getContext("2d");
 
-          const video = document.getElementById('video');
+          const video = document.getElementById("video");
           // Older browsers may not have srcObject
-          if ('srcObject' in video) {
+          if ("srcObject" in video) {
             video.srcObject = stream;
           } else {
             // Avoid using this in new browsers, as it is going away.
             video.src = window.URL.createObjectURL(stream);
           }
-          video.addEventListener('loadedmetadata', () => {
-            window.addEventListener('resize', () => set_canvas_dimensions(video, canvas, ctx));
+          video.addEventListener("loadedmetadata", () => {
+            window.addEventListener("resize", () =>
+              set_canvas_dimensions(video, canvas, ctx)
+            );
             set_canvas_dimensions(video, canvas, ctx);
 
             // Hide Logo
             play_video(video, canvas, ctx);
             setTimeout(() => {
-              document.getElementById('logo').style.opacity = 0;
-              document.getElementById('ascii-cam').style.opacity = 1;
+              document.getElementById("logo").style.opacity = 0;
+              document.getElementById("ascii-cam").style.opacity = 1;
             }, 1000);
           });
         };
@@ -151,9 +153,9 @@ A S C I I C A M
          */
         const handle_no_video = () => {
           setTimeout(() => {
-            document.getElementById('logo').style.opacity = 0;
-            document.getElementById('ascii-cam').style.opacity = 1;
-            document.getElementById('enable-cam-msg').style.opacity = 1;
+            document.getElementById("logo").style.opacity = 0;
+            document.getElementById("ascii-cam").style.opacity = 1;
+            document.getElementById("enable-cam-msg").style.opacity = 1;
             play_random();
           }, 1000);
         };
@@ -161,8 +163,8 @@ A S C I I C A M
         /**
          * @param {*} e
          */
-        const handle_error = e => {
-          console.error('Error', e);
+        const handle_error = (e) => {
+          console.error("Error", e);
           handle_no_video();
         };
 
@@ -171,7 +173,10 @@ A S C I I C A M
          * For more information see http://en.wikipedia.org/wiki/Grayscale
          * @param {Array} image_data
          */
-        const fade_to_grey = pixels => pixels.map(pixel => pixel[0] * 0.299 + pixel[1] * 0.587 + pixel[2] * 0.114);
+        const fade_to_grey = (pixels) =>
+          pixels.map(
+            (pixel) => pixel[0] * 0.299 + pixel[1] * 0.587 + pixel[2] * 0.114
+          );
 
         /**
          */
@@ -185,24 +190,30 @@ A S C I I C A M
           const dx = canvas.dataset.hoffset || 0;
           const dy = canvas.dataset.voffset || 0;
           const image_width = canvas.width - dx * 2;
-          const image_data = ctx.getImageData(dx, dy, image_width, canvas.height - dy * 2).data;
+          const image_data = ctx.getImageData(
+            dx,
+            dy,
+            image_width,
+            canvas.height - dy * 2
+          ).data;
 
           // Chunk
           const channels = 4;
-          const pixels = Array.from(Array(Math.ceil(image_data.length / channels)), (_, i) =>
-            image_data.slice(i * channels, i * channels + channels)
+          const pixels = Array.from(
+            Array(Math.ceil(image_data.length / channels)),
+            (_, i) => image_data.slice(i * channels, i * channels + channels)
           );
 
           // Draw
-          let r_output = '';
-          let g_output = '';
-          let b_output = '';
+          let r_output = "";
+          let g_output = "";
+          let b_output = "";
           pixels.forEach((pixel, i) => {
             // Break for new line
             if (i && i % image_width === 0) {
-              r_output += '\n';
-              g_output += '\n';
-              b_output += '\n';
+              r_output += "\n";
+              g_output += "\n";
+              b_output += "\n";
             }
 
             const b_idx = Math.floor((pixel[2] / 255.0) * (palette.length - 1));
@@ -236,7 +247,9 @@ A S C I I C A M
 
           const char_dims = get_character_dimensions();
           const screen_dims = get_screen_dimensions(char_dims);
-          const total_chars = Math.floor(screen_dims.char_width * screen_dims.char_height);
+          const total_chars = Math.floor(
+            screen_dims.char_width * screen_dims.char_height
+          );
 
           const mid_x = Math.floor(screen_dims.char_width / 2);
           const mid_y = Math.floor(screen_dims.char_height / 2);
@@ -244,21 +257,23 @@ A S C I I C A M
           let radius_sq = mid_x * mid_x + mid_y + mid_y;
           radius_sq = radius_sq < 2500 ? 2500 : radius_sq; // Stop the circle getting too small
 
-          let r_output = '',
-            g_output = '',
-            b_output = '';
+          let r_output = "",
+            g_output = "",
+            b_output = "";
           for (let i = 0; i < total_chars; i++) {
             // Break for new line
             if (i && i % screen_dims.char_width === 0) {
-              r_output += '\n';
-              g_output += '\n';
-              b_output += '\n';
+              r_output += "\n";
+              g_output += "\n";
+              b_output += "\n";
             }
 
             const char_pos_x = i % screen_dims.char_width;
             const char_pos_y = i / screen_dims.char_width;
 
-            let dist = (char_pos_x - mid_x) * (char_pos_x - mid_x) + (char_pos_y - mid_y) * (char_pos_y - mid_y);
+            let dist =
+              (char_pos_x - mid_x) * (char_pos_x - mid_x) +
+              (char_pos_y - mid_y) * (char_pos_y - mid_y);
             dist = dist > radius_sq ? radius_sq : dist; // Distance can be further than radius, clamp
 
             const range = Math.floor(palette.length * (1 - dist / radius_sq));
@@ -281,12 +296,12 @@ A S C I I C A M
         /**
          */
         const get_character_dimensions = () => {
-          const span = document.createElement('span');
-          span.textContent = 'X';
-          span.style.position = 'absolute';
-          span.style.left = '-100px';
+          const span = document.createElement("span");
+          span.textContent = "X";
+          span.style.position = "absolute";
+          span.style.left = "-100px";
 
-          document.querySelector('#ascii-cam pre').appendChild(span);
+          document.querySelector("#ascii-cam pre").appendChild(span);
           const dimensions = span.getBoundingClientRect();
           span.remove();
 
@@ -295,19 +310,19 @@ A S C I I C A M
 
         /**
          */
-        const get_screen_dimensions = char_dims => {
+        const get_screen_dimensions = (char_dims) => {
           return {
             width: window.innerWidth,
             height: window.innerHeight,
             char_width: Math.ceil(window.innerWidth / char_dims.width),
-            char_height: Math.ceil(window.innerHeight / char_dims.height)
+            char_height: Math.ceil(window.innerHeight / char_dims.height),
           };
         };
 
         /**
          */
         const set_canvas_dimensions = (video, canvas, ctx) => {
-          console.log('setting canvas dimensions');
+          console.log("setting canvas dimensions");
           const char_dims = get_character_dimensions();
           const screen_dims = get_screen_dimensions(char_dims);
 
@@ -315,11 +330,15 @@ A S C I I C A M
           let height = Math.max(width * 0.75, screen_dims.char_height);
 
           if (height > screen_dims.char_height) {
-            canvas.dataset.voffset = Math.floor((height - screen_dims.char_height) / 2);
+            canvas.dataset.voffset = Math.floor(
+              (height - screen_dims.char_height) / 2
+            );
             canvas.dataset.hoffset = 0;
           } else {
             width = (height / 3) * 4;
-            canvas.dataset.hoffset = Math.floor((width - screen_dims.char_width) / 2);
+            canvas.dataset.hoffset = Math.floor(
+              (width - screen_dims.char_width) / 2
+            );
             canvas.dataset.voffset = 0;
           }
 
@@ -331,12 +350,12 @@ A S C I I C A M
         };
 
         // Onload
-        window.addEventListener('load', () => {
+        window.addEventListener("load", () => {
           if (navigator && navigator.mediaDevices) {
             // Grab layers
-            r_layer = document.getElementById('r-output');
-            g_layer = document.getElementById('g-output');
-            b_layer = document.getElementById('b-output');
+            r_layer = document.getElementById("r-output");
+            g_layer = document.getElementById("g-output");
+            b_layer = document.getElementById("b-output");
 
             const constraints = { audio: false, video: {} };
             navigator.mediaDevices

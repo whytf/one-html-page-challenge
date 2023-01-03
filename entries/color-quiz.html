@@ -111,7 +111,7 @@
           "moccasin",
           "peachpuff",
           "khaki",
-          "yellow"
+          "yellow",
         ],
         greens: [
           "lawngreen",
@@ -124,7 +124,7 @@
           "greenyellow",
           "springgreen",
           "seagreen",
-          "olive"
+          "olive",
         ],
         cyans: [
           "cyan",
@@ -134,7 +134,7 @@
           "turquoise",
           "lightseagreen",
           "teal",
-          "cadetblue"
+          "cadetblue",
         ],
         blues: [
           "powderblue",
@@ -149,7 +149,7 @@
           "navy",
           "midnightblue",
           "mediumslateblue",
-          "slateblue"
+          "slateblue",
         ],
         purples: [
           "lavender",
@@ -161,7 +161,7 @@
           "magenta",
           "blueviolet",
           "purple",
-          "indigo"
+          "indigo",
         ],
         pinks: [
           "pink",
@@ -169,8 +169,8 @@
           "hotpink",
           "deeppink",
           "palevioletred",
-          "mediumvioletred"
-        ]
+          "mediumvioletred",
+        ],
       };
       var body = document.getElementsByTagName("body")[0];
       var scoreElem = document.getElementById("score");
@@ -184,8 +184,8 @@
         document
           .getElementsByClassName("container")[0]
           .getElementsByTagName("button")
-      ).forEach(button => {
-        button.addEventListener("click", event => {
+      ).forEach((button) => {
+        button.addEventListener("click", (event) => {
           if (body.dataset["value"] == event.target.dataset["value"]) {
             score++;
           }
@@ -252,13 +252,13 @@
         var possibleVals = Array.from(
           Array(colorType.length),
           (x, index) => index
-        ).filter(v => v != colorPos);
+        ).filter((v) => v != colorPos);
         buttonIds
-          .filter(bi => bi != correctAnswerButton)
-          .forEach(bi => {
+          .filter((bi) => bi != correctAnswerButton)
+          .forEach((bi) => {
             var otherColorPos = getRandomProperty(possibleVals);
             setButton(bi, colorType[otherColorPos]);
-            possibleVals = possibleVals.filter(v => v != otherColorPos);
+            possibleVals = possibleVals.filter((v) => v != otherColorPos);
           });
       }
 
