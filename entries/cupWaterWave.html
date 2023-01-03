@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      
       .main {
         margin-top: 50px;
       }
@@ -30,10 +29,10 @@
         background-position: -50px;
         background-repeat: repeat-x;
         animation: filling 10s ease-in-out infinite;
-        box-shadow: 0 0 0 1px , 0 20px 35px rgba(0, 0, 0, 1);
+        box-shadow: 0 0 0 1px, 0 20px 35px rgba(0, 0, 0, 1);
       }
-      .head-div::before{
-        content: '';
+      .head-div::before {
+        content: "";
         position: absolute;
         width: 50px;
         height: 80px;
@@ -44,12 +43,16 @@
         border-bottom-right-radius: 35px;
       }
       @keyframes filling {
-        50% {background-position: 3000px 0px;}
-        100%{background-position: 6000px 350px;}
+        50% {
+          background-position: 3000px 0px;
+        }
+        100% {
+          background-position: 6000px 350px;
+        }
       }
-      .handle{
+      .handle {
         border: 20px solid #262626;
-        height:40vh;
+        height: 40vh;
         width: 10vw;
         position: absolute;
         top: 35vh;
